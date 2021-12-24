@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html> 
+  <body> 
+    <form onsubmit="savetoLocalStorage(event)">  
+      <label>Name</label>
+      <input type ="text" name ="username" required/>
+      <label>EMail</label>
+      <input type ="text" name ="email" required/>
+      
+      <button>Sumbit</button>
+    </form>
+    <ul id="ListofUsers"> </ul>
+    <script> 
+    function savetoLocalStorage(event){
+      event.preventDefault();
+      const name = event.target.username.value;
+      const email =event.target.email.value;
+      
+      //localStorage.setItem("name",name);
+     // localStorage.setItem("email",email);
+      
+      const obj ={
+        name,
+        email
+        
+      }
+      localStorage.setItem(obj.email, JSON.stringify(obj));
+      showNewUsersOnScreen(obj);
+    }
+    function showNewUsersOnScreen(user){
+     const parentNode = document.getElementById("ListofUsers");
+     const childHTML = `<li> ${user.name}- ${user.email}</li>`
+     parentNode.innerHTML = parentNode.innerHTML+ childHTML;
+    }
+    
+   
+    </script>
+  </body>
+</html>
